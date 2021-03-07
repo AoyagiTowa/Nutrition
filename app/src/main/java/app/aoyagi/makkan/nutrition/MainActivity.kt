@@ -20,7 +20,9 @@ class MainActivity : AppCompatActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
-            onigiri.setOnClickListener { add_nuttrition(1F, 0F, 2F)
+            onigiri.setOnClickListener {
+                //下に作ったメソッドを呼び出すことで処理を簡略化している
+                add_nuttrition(1F, 0F, 2F)
             }
             pan.setOnClickListener { add_nuttrition(3F,8F,3F)
 
@@ -45,16 +47,19 @@ class MainActivity : AppCompatActivity() {
                 green.text = green_point.toString()
                 yellow.text = yellow_point.toString()
             }
-            project.setOnClickListener {
-                val toEditActivityIntent= Intent(this,edit::class.java)
-                startActivity(toEditActivityIntent)
-                val requestCode: Int = 1000
-                startActivityForResult(intent, requestCode)
-            }
+//            project.setOnClickListener {
+//                val toEditActivityIntent= Intent(this,edit::class.java)
+//                startActivity(toEditActivityIntent)
+//                val requestCode: Int = 1000
+//                startActivityForResult(intent, requestCode)
+//            }
+            //ボタンのid
             free.setOnClickListener {
+                //それぞれのeditTextからテキストを取得
                 val red_edit: String = red_field.text.toString()
                 val yellow_edit = yellow_field.text.toString()
                 val green_edit = green_field.text.toString()
+                //今までの変数にそれを加算して再度テキストに表示する
                 red.text = (red_point + red_edit.toFloat()).toString()
                 yellow.text = (yellow_point + yellow_edit.toFloat()).toString()
                 green.text = (green_point + green_edit.toFloat()).toString()
@@ -72,6 +77,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    //加算して表示する処理
     fun add_nuttrition (num1 : Float, num2 :Float,num3 :Float){
         red_point += num1
         green_point += num2
